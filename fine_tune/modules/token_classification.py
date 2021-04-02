@@ -69,6 +69,9 @@ class TokenClassification(BaseModule):
         # updating to test_epoch_end instead of deprecated test_end
         ret, predictions, targets = self._eval_end(outputs)
 
+        print("predictions: ", predictions)
+        print("target: ", targets)
+        print()
         # Converting to the dict required by pl
         # https://github.com/PyTorchLightning/pytorch-lightning/blob/master/\
         # pytorch_lightning/trainer/logging.py#L139

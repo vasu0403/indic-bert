@@ -160,7 +160,7 @@ def main(argvec=None):
 
     # high-level command line parameters
     dataset = hparams['dataset']
-    train_lang = hparams.get('train_lang', hparams['lang'])
+    train_lang = hparams['lang']
     test_lang = hparams['lang']
     model = hparams['model']
     iglue_dir = hparams['iglue_dir']

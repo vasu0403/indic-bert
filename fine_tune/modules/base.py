@@ -371,7 +371,7 @@ class BaseModule(pl.LightningModule):
     def run_module(self):
         trainer = create_trainer(self, self.hparams)
         hparams_copy = copy.deepcopy(self.hparams)
-
+        self.trainer = trainer
         if self.hparams['do_train']:
             checkpoints = list(sorted(glob.glob(os.path.join(self.hparams['output_dir'], 'checkpointepoch=*.ckpt'), recursive=True)))
             if len(checkpoints) == 0:
@@ -383,6 +383,13 @@ class BaseModule(pl.LightningModule):
         # Optionally, predict on dev set and write to output_dir
         if self.hparams['do_predict']:
             trainer.test(self.trained_model)
+
+    def do_NER(self, text):
+        with open("../indic-glue/wikiann-ner/hi/hi-test.txt", "w+") as file:
+            file.write(text)
+        with open("../indic-glue/wikiann-ner/hi/test.txt", "w+") as file:
+            file.write(text)
+        self.trainer.test(self.trained_model)
 
 
 # Fixes __temp_weight_ddp_end.ckpt bug
