@@ -192,12 +192,12 @@ class BaseModule(pl.LightningModule):
         examples = self.dataset.get_examples(lang, mode)
 
         cached_features_file = self._feature_file(mode)
-        if os.path.exists(cached_features_file)\
-                and not self.hparams['overwrite_cache']:
-            features = torch.load(cached_features_file)
-        else:
-            features = self.convert_examples_to_features(examples)
-            torch.save(features, cached_features_file)
+        # if os.path.exists(cached_features_file)\                          // removing caching
+        #         and not self.hparams['overwrite_cache']:
+        #     features = torch.load(cached_features_file)
+        # else:
+        features = self.convert_examples_to_features(examples)
+        torch.save(features, cached_features_file)
 
         return features
 
